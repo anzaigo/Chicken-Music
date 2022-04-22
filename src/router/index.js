@@ -1,24 +1,35 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
 const routes = [
-  {
+  { // 推荐
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    redirect: '/recommend' // 重定向
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  { // 推荐
+    path: '/recommend',
+    name: 'Recommend',
+    component: () => import(/* webpackChunkName: "recommend" */ '@/views/recommend')
+  },
+  { // 歌手
+    path: '/singer',
+    name: 'Singer',
+    component: () => import(/* webpackChunkName: "singer" */ '@/views/singer')
+  },
+  { // 排行
+    path: '/top-list',
+    name: 'Top-list',
+    component: () => import(/* webpackChunkName: "top-list" */ '@/views/top-list')
+  },
+  { // 搜索
+    path: '/search',
+    name: 'Search',
+    component: () => import(/* webpackChunkName: "search" */ '@/views/search')
   }
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(), // hash路由，这里可以切换history路由（createWebHistory）
   routes
 })
 

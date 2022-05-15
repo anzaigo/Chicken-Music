@@ -13,13 +13,19 @@ export default {
         click: {
             type: Boolean,
             default: true
+        },
+        probeType: {
+            type: Number,
+            default: 0
         }
     },
-    setup(props) {
+    emits: ['scroll'], // 自定义一个scroll事件，向外派发scroll事件
+    setup(props, { emit }) {
         const rootRef = ref(null)
-        useScroll(rootRef, props)
+        const scroll = useScroll(rootRef, props, emit)
         return {
-            rootRef
+            rootRef,
+            scroll
         }
     }
 }

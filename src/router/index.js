@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
-  { // 推荐
+  { // 首页
     path: '/',
     name: 'home',
     redirect: '/recommend' // 重定向
@@ -14,7 +14,13 @@ const routes = [
   { // 歌手
     path: '/singer',
     name: 'Singer',
-    component: () => import(/* webpackChunkName: "singer" */ '@/views/singer')
+    component: () => import(/* webpackChunkName: "singer" */ '@/views/singer'),
+    children: [
+      {
+        path: ':id',
+        component: () => import(/* webpackChunkName: "singer-detail" */ '@/views/singer-detail')
+      }
+    ]
   },
   { // 排行
     path: '/top-list',

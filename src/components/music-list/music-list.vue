@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import Scroll from '@/components/base/scroll/scroll'
+import Scroll from '@/components/wrap-scroll'
 import SongList from '@/components/base/song-list/song-list'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 const RESEVED_HEIGHT = 40 // 顶部区域title的高度
 
@@ -107,8 +107,10 @@ export default {
             }
         },
         scrollStyle() {
+            const bottom = this.playlist.length ? '60px' : '0'
             return {
-                top: `${this.imageHeight}px` // 固定scroll组件的高度
+                top: `${this.imageHeight}px`, // 固定scroll组件的高度
+                bottom // 撑开mini播放器的高度
             }
         },
         filterStyle() { // 向上滚动背景逐渐模糊
@@ -121,7 +123,10 @@ export default {
             return {
                 backdropFilter: `blur(${blur}px)`
             }
-        }
+        },
+        ...mapState([
+            'playlist'
+        ])
     },
     mounted() {
         this.imageHeight = this.$refs.bgImage.clientHeight // 获取背景图片高度

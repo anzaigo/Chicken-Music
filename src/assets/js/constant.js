@@ -1,4 +1,5 @@
 export const SINGER_KEY = '__singer__' // 歌手信息&歌曲
+export const FAVORITE_KEY = '__favorite__' // 收藏歌曲的唯一key值
 
 // 播放方式
 export const PLAY_MODE = {

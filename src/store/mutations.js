@@ -16,6 +16,17 @@ const mutations = {
     },
     setFullScreen(state, fullScreen) { // 设置是否全屏
         state.fullScreen = fullScreen
+    },
+    setFavorteList(state, list) { // 添加收藏
+        state.favoriteList = list
+    },
+    addSongLyric(state, { song, lyric }) { // 添加歌词
+        state.squenceList.map((item) => {
+            if (item.mid === song.mid) {
+                item.lyric = lyric
+            }
+            return item
+        })
     }
 }
 

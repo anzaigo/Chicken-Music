@@ -16,3 +16,10 @@ function swap(arr, i, j) {
     arr[i] = arr[j]
     arr[j] = t
 }
+
+export function formatTime(interval) { // 转换播放歌曲的时间格式
+    interval = interval | 0
+    const minute = ((interval / 60 | 0) + '').padStart(2, '0') // 分钟----''只是为了变成字符串
+    const second = (interval % 60 + '').padStart(2, '0') // 秒钟
+    return `${minute}:${second}`
+}

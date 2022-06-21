@@ -9,7 +9,13 @@ const routes = [
   { // 推荐
     path: '/recommend',
     name: 'Recommend',
-    component: () => import(/* webpackChunkName: "recommend" */ '@/views/recommend')
+    component: () => import(/* webpackChunkName: "recommend" */ '@/views/recommend'),
+    children: [
+      {
+        path: ':id',
+        component: () => import(/* webpackChunkName: "album" */'@/views/album')
+      }
+    ]
   },
   { // 歌手
     path: '/singer',

@@ -6,14 +6,17 @@
                 <div class="slider-wrapper">
                     <div class="slider-content">
                         <!-- v-if="sliders.length"->有数据在加载组件 因为better-scroll的slide要求必须有一条以上的数据。这里是异步获取数据的当第一次加载时还没有获取到数据会报错slide need at least one slide page to be initialised.please check your DOM layout -->
-                        <Slider v-if="sliders.length" :sliders = sliders></Slider>
+                        <Slider v-if="sliders.length" :sliders = "sliders"></Slider>
                     </div>
                 </div>
                 <!-- 歌单推荐列表 -->
                 <div class="recommend-list">
                     <h1 class="list-title" v-show="!loading">热门歌单推荐</h1><!-- v-show="!loading"---数据加载完在显示 -->
                     <ul>
-                        <li class="item" v-for="item in albums" :key="item.id">
+                        <li class="item"
+                          v-for="item in albums" :key="item.id"
+                          @click="selectItem(item)"
+                        >
                             <div class="icon">
                                 <img width="60" height="60" v-lazy="item.pic">
                             </div>
@@ -26,6 +29,11 @@
                 </div>
             </div>
         </Scroll>
+        <router-view v-slot="{ Component }">
+            <transition appear name="slide">
+                <component :is="Component" :data="selectedAlbum"/>
+            </transition>
+        </router-view>
     </div>
 </template>
 
@@ -33,6 +41,8 @@
 import { getRecommend } from '@/service/recommend'
 import Slider from '@/components/base/slider/slider'
 import Scroll from '@/components/wrap-scroll'
+import storage from 'good-storage'
+import { ALBUM_KEY } from '@/assets/js/constant'
 
 export default {
     name: 'recommend',
@@ -44,7 +54,8 @@ export default {
         return {
             sliders: [], // 轮播图相关数据
             albums: [], // 歌单列表数据
-            loadingText: '正在载入...' // v-loading的动态传参
+            loadingText: '正在载入...', // v-loading的动态传参
+            selectedAlbum: null
         }
     },
     computed: {
@@ -56,6 +67,18 @@ export default {
         const result = await getRecommend() // 获取轮播图&歌单相关数据
         this.sliders = result.sliders
         this.albums = result.albums
+    },
+    methods: {
+        selectItem(album) {
+            this.selectedAlbum = album
+            this.caheAlbum(album)
+            this.$router.push({
+                path: `/recommend/${album.id}`
+            })
+        },
+        caheAlbum(album) {
+            storage.session.set(ALBUM_KEY, album)
+        }
     }
 }
 </script>

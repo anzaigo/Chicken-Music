@@ -1,6 +1,7 @@
 export const SINGER_KEY = '__singer__' // 歌手信息&歌曲
 export const FAVORITE_KEY = '__favorite__' // 收藏歌曲的唯一key值
 export const ALBUM_KEY = '__album__' // 歌手详情缓存
+export const TOP_KEY = '__top__' // 排行详情缓存
 
 // 播放方式
 export const PLAY_MODE = {

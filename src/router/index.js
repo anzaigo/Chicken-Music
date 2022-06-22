@@ -31,7 +31,13 @@ const routes = [
   { // 排行
     path: '/top-list',
     name: 'Top-list',
-    component: () => import(/* webpackChunkName: "top-list" */ '@/views/top-list')
+    component: () => import(/* webpackChunkName: "top-list" */ '@/views/top-list'),
+    children: [
+      {
+        path: ':id',
+        component: () => import(/* webpackChunkName: "top-detall" */'@/views/top-detail')
+      }
+    ]
   },
   { // 搜索
     path: '/search',

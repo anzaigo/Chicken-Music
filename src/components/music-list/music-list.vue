@@ -22,12 +22,12 @@
           class="list"
           :style="scrollStyle"
           v-loading="loading"
-          v-no-result="noResult"
+          v-no-result[noResultText]="noResult"
           :probe-type="3"
           @scroll="onScroll"
         >
             <div class="song-list-wrapper">
-                <SongList :songs="songs" @select="selectItem"></SongList>
+                <SongList :songs="songs" @select="selectItem" :rank="rank"></SongList>
             </div>
         </Scroll>
     </div>
@@ -55,7 +55,12 @@ export default {
         },
         title: String, // 歌手名字
         pic: String, // 图片
-        loading: Boolean // 数据是否加载完毕
+        loading: Boolean, // 数据是否加载完毕
+        noResultText: {
+            type: String,
+            default: '抱歉，没有找到可播放的歌曲'
+        },
+        rank: Boolean // 不接受值时默认是false
     },
     data() {
         return {

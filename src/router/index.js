@@ -42,7 +42,13 @@ const routes = [
   { // 搜索
     path: '/search',
     name: 'Search',
-    component: () => import(/* webpackChunkName: "search" */ '@/views/search')
+    component: () => import(/* webpackChunkName: "search" */ '@/views/search'),
+    children: [
+      {
+        path: ':id',
+        component: () => import(/* webpackChunkName: "singer-detail" */ '@/views/singer-detail')
+      }
+    ]
   }
 ]
 

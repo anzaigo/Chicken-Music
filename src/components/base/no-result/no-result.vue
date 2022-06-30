@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 export default {
     name: 'no-result',
     data() {
@@ -26,8 +26,8 @@ export default {
 <style lang="scss" scoped>
 .no-result{
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 50%;
+    left: 50%;
     transform: translate3d(-50%, -50%, 0);
     .no-result-content{
         text-align: center;

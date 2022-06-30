@@ -29,3 +29,10 @@ export function remove(key, compare) { // 删除收藏
     storage.set(key, items)
     return items
 }
+export function load(key) { // 读取本地存储；有就添加，没有就默认[]
+    return storage.get(key, [])
+}
+export function clear(key) { // 清空该本地存储
+    storage.remove(key)
+    return []
+}

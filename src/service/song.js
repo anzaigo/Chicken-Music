@@ -15,7 +15,7 @@ export function processSongs(songs) {
             song.url = map[song.mid]
             return song
         }).filter((song) => {
-            return song.url.indexOf('vkey') > -1
+            return song.url && song.url.indexOf('vkey') > -1 // song.url不加搜索功能可能会有bug
         })
     })
 }

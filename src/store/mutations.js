@@ -27,6 +27,9 @@ const mutations = {
             }
             return item
         })
+    },
+    setSearchHistory(state, searches) { // 添加搜索历史
+        state.searchHistory = searches
     }
 }
 

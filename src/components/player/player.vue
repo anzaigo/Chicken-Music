@@ -118,6 +118,7 @@ import MiniPlayer from './mini-player'
 import { formatTime } from '@/assets/js/util'
 import { PLAY_MODE } from '../../assets/js/constant'
 import useAnimation from './use-animation'
+import usePlayHistory from './use-play-history'
 
 export default {
     name: 'player',
@@ -154,6 +155,7 @@ export default {
         const { currentLyric, currentLineNum, playLyric, pureMusicLyric, playingLyric, lyricScrollRef, lyricListRef, stopLyric } = useLyric({ songReady, currentTime })
         const { currentShow, middleLStyle, middleRStyle, onMiddleTouchStart, onMiddleTouchMove, onMiddleTouchEnd } = useMiddleInteractive()
         const { cdWrapperRef, enter, afterEnter, leave, afterLeave } = useAnimation()
+        const { savePlay } = usePlayHistory()
         // computed
         const playIcon = computed(() => { // 播放 or 暂停 图标
             return playing.value ? 'icon-pause' : 'icon-play'
@@ -251,6 +253,7 @@ export default {
             }
             songReady.value = true
             playLyric() // 可能先获取到歌词再ready，也可能先ready再获取到歌词，为了保证事件同步，这里也要执行
+            savePlay(currentSong.value) // 添加播放记录到本地
         }
         function error() { // 当遇到歌曲播放出错时
             songReady.value = true // 为了出错误时，能让用户可以继续点击切换歌曲

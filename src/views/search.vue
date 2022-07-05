@@ -8,7 +8,7 @@
           ref="scrollRef"
         >
             <div>
-                <div class="hot-keys">
+                <div class="hot-keys" v-if="hotKeys.length">
                     <h1 class="title">热门搜索</h1>
                     <ul>
                         <li class="item"
@@ -96,7 +96,9 @@ export default {
         const { saveSearch, deleteSearch, clearSearch } = useSearchHistory()
 
         getHotKeys().then((result) => { // 请求搜索推荐数据
-            hotKeys.value = result.hotKeys
+            if (result) {
+                hotKeys.value = result.hotKeys
+            }
         })
         // watch
         watch(query, async (newQuery) => { // bug：当从搜索页点击进去播放歌曲并切换mini播放器时，BS的refresh并没有在搜索页（在singer-detail二级路由）导致了BS计算失败

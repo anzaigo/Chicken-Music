@@ -6,7 +6,10 @@
               @click="selectItem(item)"
             >
                 <span class="text">{{item}}</span>
-                <span class="icon" @click.stop="deleteItem(item)">
+                <span class="icon"
+                  v-if="showDelete"
+                  @click.stop="deleteItem(item)"
+                >
                     <i class="icon-delete"></i>
                 </span>
             </li>
@@ -23,6 +26,10 @@
                 default() {
                     return []
                 }
+            },
+            showDelete: { // 控制显示隐藏X按钮
+                type: Boolean,
+                default: true
             }
         },
         emits: ['select', 'delete'],

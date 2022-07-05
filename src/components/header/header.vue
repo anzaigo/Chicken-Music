@@ -2,6 +2,9 @@
     <div class="header">
         <span class="icon"></span>
         <h1 class="text">Chicken Music</h1>
+        <router-link class="mine" to="/user">
+            <i class="icon-mine"></i>
+        </router-link>
     </div>
 </template>
 
@@ -16,6 +19,7 @@ export default {
     height: 44px;
     text-align: center;
     color: $color-theme;
+    font-size: 0;
     .icon{
         display: inline-block;
         vertical-align: top;
@@ -28,8 +32,20 @@ export default {
     }
     .text{
         display: inline-block;
+        vertical-align: top;
         font-size: $font-size-large;
         line-height: 44px;
+    }
+    .mine {
+        position: absolute;
+        top: 0;
+        right: 0;
+        .icon-mine {
+            display: block;
+            padding: 12px;
+            font-size: $font-size-large-x;
+            color: $color-theme;
+        }
     }
 }
 </style>

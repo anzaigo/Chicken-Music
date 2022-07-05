@@ -30,6 +30,9 @@ const mutations = {
     },
     setSearchHistory(state, searches) { // 添加搜索历史
         state.searchHistory = searches
+    },
+    setPlayHistory(state, songs) { // 添加播放历史
+        state.playHistory = songs
     }
 }
 

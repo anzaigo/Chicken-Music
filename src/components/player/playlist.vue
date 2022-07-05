@@ -48,6 +48,7 @@
                   text="是否清空播放列表？"
                   confirm-btn-text="清空"
                 ></Confirm>
+                <AddSong ref="addSongRef"></AddSong>
             </div>
         </transition>
     </teleport>
@@ -56,6 +57,7 @@
 <script>
 import Scroll from '@/components/base/scroll/scroll'
 import Confirm from '@/components/base/confirm/confirm'
+import AddSong from '../add-song/add-song.vue'
 import { ref, computed, nextTick, watch } from 'vue'
 import { useStore } from 'vuex'
 import useMode from './use-mode'
@@ -64,13 +66,15 @@ export default {
     name: 'playlist',
     components: {
         Scroll,
-        Confirm
+        Confirm,
+        AddSong
     },
     setup () {
         // Data
         const scrollRef = ref(null)
         const listRef = ref(null)
         const confirmRef = ref(null)
+        const addSongRef = ref(null)
 
         const visible = ref(false)
         const removing = ref(false) // （保护3） 当歌曲已被删除时（不存在）不提交removeSong，并使变色提示用户不能点击
@@ -148,6 +152,9 @@ export default {
             store.dispatch('clearSongList')
             hide()
         }
+        function showAddSong() {
+            addSongRef.value.show()
+        }
         return {
             visible,
             playlist,
@@ -157,6 +164,7 @@ export default {
             squenceList,
             currentSong,
             removing,
+            addSongRef,
             getCurrentIcon,
             show,
             hide,
@@ -164,6 +172,7 @@ export default {
             removeSong,
             showConfirm,
             confirmClear,
+            showAddSong,
             // use-mode
             modeIcon,
             modeText,

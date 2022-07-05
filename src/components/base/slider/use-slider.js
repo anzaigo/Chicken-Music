@@ -1,7 +1,7 @@
 import BScroll from '@better-scroll/core'
 import Slide from '@better-scroll/slide'
 
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, onActivated, onDeactivated } from 'vue'
 BScroll.use(Slide)
 
 export default function useSlider(wrapperRef) {
@@ -24,6 +24,15 @@ export default function useSlider(wrapperRef) {
     })
     onUnmounted(() => {
         slider.value.destroy()
+    })
+
+    // keep-alive
+    onActivated(() => {
+        slider.value.enable() // 启用 BetterScroll
+        slider.value.refresh()
+    })
+    onDeactivated(() => {
+        slider.value.disable() // 禁用 BetterScroll，DOM 事件（如 touchstart、touchmove、touchend）的回调函数不再响应
     })
     return { slider, currentPageIndex }
 }

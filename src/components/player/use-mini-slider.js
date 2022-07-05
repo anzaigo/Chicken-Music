@@ -1,4 +1,4 @@
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick, onActivated, onDeactivated } from 'vue'
 import { useStore } from 'vuex'
 import BScroll from '@better-scroll/core'
 import Slide from '@better-scroll/slide'
@@ -64,6 +64,14 @@ export default function useMiniSlider() {
         if (slider.value) {
             slider.value.destroy()
         }
+    })
+
+    onActivated(() => {
+        slider.value.enable() // 启用 BetterScroll
+        slider.value.refresh()
+    })
+    onDeactivated(() => {
+        slider.value.disable() // 禁用 BetterScroll，DOM 事件（如 touchstart、touchmove、touchend）的回调函数不再响应
     })
     return {
         slider,

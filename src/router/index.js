@@ -49,6 +49,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "singer-detail" */ '@/views/singer-detail')
       }
     ]
+  },
+  { // 我的
+    path: '/user',
+    components: { // 命名视图
+      user: () => import(/* webpackChunkName: "user-centent" */ '@/views/user-center')
+    }
   }
 ]
 

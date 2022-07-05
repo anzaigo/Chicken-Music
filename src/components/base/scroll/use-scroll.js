@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, onActivated, onDeactivated } from 'vue'
 import BScroll from '@better-scroll/core'
 import ObserveDOM from '@better-scroll/observe-dom'
 BScroll.use(ObserveDOM)
@@ -19,6 +19,15 @@ export default function useScroll(wrapperRef, options, emit) {
     })
     onUnmounted(() => {
         scroll.value.destroy()
+    })
+
+    // keep-alive
+    onActivated(() => {
+        scroll.value.enable() // 启用 BetterScroll
+        scroll.value.refresh()
+    })
+    onDeactivated(() => {
+        scroll.value.disable() // 禁用 BetterScroll，DOM 事件（如 touchstart、touchmove、touchend）的回调函数不再响应
     })
 
     return scroll

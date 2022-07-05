@@ -17,7 +17,7 @@ module.exports = {
       registerRouter(app)
     }
   },
-  configureWebpack: (config) => {
+  configureWebpack: (config) => { // 查看打包后的首页性能；使用方法：npm run build --report
     if (process.env.npm_config_report) {
       const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
       config.plugins.push(new BundleAnalyzerPlugin())
